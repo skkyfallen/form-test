@@ -1,9 +1,8 @@
 
-*{
-    padding:0;
-    margin:0;
-    box-sizing:border-box;
+.login {
+    color:black;
 }
+
 .login-form{
     display:flex;
     flex-direction: column;
@@ -23,19 +22,4 @@
     border-bottom:3px solid black;
     
     
-}
-.form-image {
-    width:500px;
-    
-    
-}
-.full-form{
-    display:flex;
-    width:400px;
-    height:30px;
-    
-    
-}
-.login{
-    color:white;
 }
