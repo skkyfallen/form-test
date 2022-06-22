@@ -23,11 +23,11 @@ const Notes = () => {
       });
 
       console.log(response.data, response.status);
-      console.log('STATATSTST', response.status)
+      console.log("STATATSTST", response.status);
     })().catch((error) => {
       console.error(error.response.status, error.response);
-      if(error.response.status >= 400) {
-        alert("Error: " + error.response.data.message)
+      if (error.response.status >= 400) {
+        alert("Error: " + error.response.data.message);
       }
     });
   };
