@@ -15,19 +15,33 @@ const Notes = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log("Note Submitted");
+    alert("Submitted");
     (async () => {
-      const response = await Axios.get("http://localhost:4000/notes/");
-      //   const response = await axios.post("http://localhost:4000/notes", { title: '', content:'Ezeh'});
+      const response = await Axios.post("http://localhost:4000/notes", {
+        title: values.title,
+        content: values.content,
+      });
 
       console.log(response.data, response.status);
+      console.log('STATATSTST', response.status)
     })().catch((error) => {
-      console.error(error);
+      console.error(error.response.status, error.response);
+      if(error.response.status >= 400) {
+        alert("Error: " + error.response.data.message)
+      }
     });
-    alert("Submitted");
+  };
+  const requestNote = () => {
+    Axios.get("http://localhost:4000/notes").then((response) => {
+      console.log(response.data.body);
+    });
   };
   return (
     <div>
       <div className="notes-container">
+        <button className="callApi" onClick={requestNote}>
+          Call
+        </button>
         <form className="notes-form" onSubmit={handleSubmit}>
           <input
             onChange={handleTitleChange}
