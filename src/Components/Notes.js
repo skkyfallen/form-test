@@ -21,7 +21,6 @@ const Notes = () => {
         title: values.title,
         content: values.content,
       });
-
       console.log(response.data, response.status);
       console.log("STATATSTST", response.status);
     })().catch((error) => {
