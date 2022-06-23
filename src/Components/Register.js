@@ -32,7 +32,7 @@ function Form() {
 
         <input
           onChange={handleEmailChange}
-          type="text"
+          type="email"
           value={values.email}
           className="input-field"
           placeholder="Enter Your Email"
