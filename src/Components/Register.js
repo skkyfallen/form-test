@@ -15,12 +15,31 @@ function Form() {
   const handlePasswordChange = (event) => {
     setValues({ ...values, password: event.target.value });
   };
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     setSubmitted(true);
-    console.log("email:", values.email + "password:", values.password);
-    console.log("submitted");
-    alert("successfull Login");
+    console.log("Email:", values.email, "password:", values.password);
+    const response = await Axios.post("http://localhost:4000/Register", {
+      email: values.email,
+      password: values.password,
+    });
+    console.log(response.data, response.status);
+    if (response.status == 200) {
+      alert("Sucessfull Authentication");
+      window.location.href = "https://www.google.com";
+    } else {
+      alert("Failed to authenticate");
+    }
+  };
+  const callApi = () => {
+    (async () => {
+      const response = await Axios.get("http://localhost:4000/Register");
+      //   const response = await axios.post("http://localhost:4000/notes", { title: '', content:'Ezeh'});
+
+      console.log(response.data, response.status);
+    })().catch((error) => {
+      console.error(error);
+    });
   };
   return (
     <div>
@@ -38,7 +57,7 @@ function Form() {
           placeholder="Enter Your Email"
           name="username"
           required
-          autocomplete="off"
+          autoComplete="off"
         />
         <input
           onChange={handlePasswordChange}
@@ -53,6 +72,7 @@ function Form() {
           Register
         </button>
       </form>
+      <button onClick={callApi}>Call</button>
     </div>
   );
 }

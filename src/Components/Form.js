@@ -15,12 +15,20 @@ function Form() {
   const handlePasswordChange = (event) => {
     setValues({ ...values, password: event.target.value });
   };
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     setSubmitted(true);
-    console.log("Username:", values.username + "password:", values.password);
-    console.log("submitted");
-    alert("successfull Login");
+    console.log("Email:", values.username, "password:", values.password);
+    const response = await Axios.post("http://localhost:4000/Login", {
+      username: values.username,
+      password: values.password,
+    });
+    console.log(response.data, response.status);
+    if (response.status == 200) {
+      alert("Sucessfull Authentication");
+    } else {
+      alert("Authentication Failed");
+    }
   };
   return (
     <div>
@@ -38,7 +46,7 @@ function Form() {
           placeholder="Enter Your Username"
           name="username"
           required
-          autocomplete="off"
+          autoComplete="on"
         />
         <input
           onChange={handlePasswordChange}
